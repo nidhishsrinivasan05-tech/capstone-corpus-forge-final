@@ -1,0 +1,59 @@
+# ============================================================
+# Top-level .gitignore for the whole corpus_forge-team folder.
+# Protects secrets and excludes local/build junk from the push.
+# Patterns without a leading slash match at ANY depth, so the
+# nested project's .env / .venv / caches are all covered.
+# ============================================================
+
+# --- Secrets (NEVER commit) ---
+.env
+**/.env
+*.env
+!*.env.example
+
+# --- Virtual environments ---
+.venv/
+venv/
+**/.venv/
+**/venv/
+
+# --- Python cache/artifacts ---
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# --- Tool caches / IDE metadata ---
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.metals/
+.bloop/
+.bsp/
+.vscode/
+.sixth/
+**/.pytest_cache/
+**/.mypy_cache/
+**/.metals/
+
+# --- Local application data / databases ---
+**/data/corpus_forge.db
+**/data/uploads/*
+!**/data/uploads/.gitkeep
+**/chroma/
+**/chroma_db/
+*.db
+*.mv.db
+*.lock.db
+
+# --- Local QA/demo snapshots ---
+**/*_response.html
+**/served_*.css
+**/served_*.js
+**/stats.json
+
+# --- OS files ---
+.DS_Store
+Thumbs.db

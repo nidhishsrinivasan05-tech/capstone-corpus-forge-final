@@ -489,7 +489,7 @@ def assistant_chat():
         "index.html",
         **dashboard_context(
             assistant_messages=history,
-            assistant_used_model=model or os.environ.get("GEMINI_MODEL", "gemini-1.5-flash"),
+            assistant_used_model=model or os.environ.get("GEMINI_MODEL", "gemini-2.5-flash"),
         ),
     )
 

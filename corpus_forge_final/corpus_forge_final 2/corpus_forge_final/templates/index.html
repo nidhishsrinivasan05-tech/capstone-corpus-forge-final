@@ -418,6 +418,11 @@
     </div>
     {% if used_gemini %}
     <span class="status-pill">Gemini</span>
+    {% endif %} {% if diagnostics and diagnostics.engine %}
+    <span
+      class="status-pill"
+      title="Retrieval engine selected by corpus size"
+    >{% if "chromadb" in diagnostics.engine %}ChromaDB{% else %}BM25{% endif %}</span>
     {% endif %} {% if diagnostics %}
     <span class="status-pill">{{ diagnostics.results_returned }} sources</span>
     {% endif %} {% if fallback_used %}
@@ -429,6 +434,9 @@
   <pre>{{ answer }}</pre>
   {% if diagnostics %}
   <div class="diagnostic-strip">
+    {% if diagnostics.engine %}
+    <span>Engine: {% if "chromadb" in diagnostics.engine %}ChromaDB (vector){% else %}BM25 (local){% endif %}</span>
+    {% endif %}
     <span>Selected: {{ diagnostics.selected_documents }}</span>
     <span>Indexed words: {{ diagnostics.indexed_words }}</span>
     <span>Results: {{ diagnostics.results_returned }}</span>
@@ -445,8 +453,8 @@
       >
     </div>
     <p class="small">
-      {{ item.strategy }} / score {{ item.score }} / words {{ item.start_word
-      }}-{{ item.end_word }}
+      {% if "chromadb" in item.strategy %}ChromaDB vector{% else %}{{ item.strategy }}{% endif %}
+      / score {{ item.score }} / words {{ item.start_word }}-{{ item.end_word }}
     </p>
     <p class="small">Matched terms: {{ item.matched_terms|join(", ") }}</p>
     <p>{{ item.chunk[:500] }}</p>

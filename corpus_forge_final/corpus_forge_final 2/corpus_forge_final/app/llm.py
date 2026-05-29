@@ -78,7 +78,7 @@ def gemini_embed_texts(
 
 
 def _gemini_model(model: str | None = None) -> str:
-    return (model or os.environ.get("GEMINI_MODEL", "gemini-1.5-flash")).strip()
+    return (model or os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")).strip()
 
 
 def _gemini_temperature(creativity: str) -> float:
